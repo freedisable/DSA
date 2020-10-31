@@ -16,6 +16,7 @@ private:
 	void top(node* temp);
 	void free(node*& temp);
 	void show_data(node* temp);
+	void delNodeNext(node*& temp, int value);
 
 public:
 	List();
@@ -26,6 +27,7 @@ public:
 	void top() { top(list); } //value head of list
 	void free() { free(list); }
 	void show_data() { show_data(list); }
+	void delNodeNext(int value){ delNodeNext(list, value); }
 };
 void List::show_data(node* temp) {
 	if (temp != NULL) {
@@ -93,18 +95,33 @@ void List::sort(node*& temp) {
 
 	}
 }
+
+void List::delNodeNext(node*& temp, int value){
+	if (temp == NULL)
+		return;
+	if (temp->data == value) {
+		temp->next = temp->next->next;
+		return;
+	}
+	delNodeNext(temp->next, value);
+}
 int main()
 {
-	//List list;
-	//list.addHead(4);
-	//list.addHead(2);
-	//list.addHead(1);
-	//list.addHead(3);
+	List list;
+	list.addHead(4);
+	list.addHead(2);
+	list.addHead(1);
+	list.addHead(3);
 
-	//list.addHead(11);
-	//list.addHead(9);
-	//list.sort();
-	//list.show_data();
+	list.addHead(11);
+	list.addHead(9);
+	list.addHead(18);
+	list.addHead(10);
+	list.addHead(16);
+	list.addHead(12);
+	list.sort();
+	list.delNodeNext(3);
+	list.show_data();
 	return 0;
 }
 
